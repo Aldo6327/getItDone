@@ -15,7 +15,34 @@ class ListTVC: UITableViewController {
         super.viewDidLoad()
 
     }
-
+    @IBAction func addItem(_ sender: Any) {
+        print("add was pushed")
+        let alert = UIAlertController(title: "Register",
+                                      message: "Register",
+                                      preferredStyle: .alert)
+        let saveAction = UIAlertAction(title: "Save", style: .default) { action in
+            let listItem = alert.textFields!
+        }
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .default)
+        
+        alert.addTextField { (textField: UITextField) in
+            textField.keyboardAppearance = .dark
+            textField.keyboardType = .emailAddress
+            textField.autocorrectionType = .no
+            textField.placeholder = "Enter Item"
+            textField.textColor = UIColor.black
+            textField.font = UIFont(name: "Helvetica", size: 18)
+        }
+                
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+        
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -35,7 +62,7 @@ class ListTVC: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "lists", for: indexPath)
         cell.textLabel?.text = list[indexPath.row]
 
         return cell
